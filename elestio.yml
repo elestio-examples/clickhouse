@@ -1,3 +1,10 @@
+config:
+  runTime: "docker-compose"
+  version: ""
+  framework: ""
+  buildCommand: "docker-compose build"
+  buildDir: "/"
+  runCommand: "docker-compose up -d"
 ports:
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
