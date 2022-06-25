@@ -32,6 +32,6 @@ services:
         restart: unless-stopped
         environment:
             - CH_NAME=clickhouse
-            - CH_HOST=https://[DOMAIN]:18123
+            - CH_HOST=https://${DOMAIN}:18123
             - CH_LOGIN=root
             - CH_PASSWORD=${SOFTWARE_PASSWORD}

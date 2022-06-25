@@ -13,3 +13,5 @@ environments:
     value: "latest"
   - key: "SOFTWARE_PASSWORD"
     value: "random_password"
+  - key: "DOMAIN"
+    value: "[CI_CD_DOMAIN]"    
