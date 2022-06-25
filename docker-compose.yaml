@@ -1,29 +1,37 @@
-version: '3'
+version: "3.3"
 services:
-  mysql:
-    image: mysql:8
-    restart: always
-    command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    environment:
-      MYSQL_ROOT_PASSWORD: ${SOFTWARE_PASSWORD}
-    ports:
-      - '172.17.0.1:3306:3306'
+
+  clickhouse:
+    image: yandex/clickhouse-server:${SOFTWARE_VERSION_TAG}
+    restart: unless-stopped
     volumes:
-      - './data:/var/lib/mysql'
-      - './sql:/docker-entrypoint-initdb.d'
-  pma:
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    links:
-      - mysql:mysql
+      - ./data:/var/lib/clickhouse
+      - ./config/clickhouse-user-config.xml:/etc/clickhouse-server/users.d/logging.xml:ro
+      - ./config/clickhouse-options.xml:/etc/clickhouse-server/config.d/options.xml:ro
     ports:
-      - "172.17.0.1:24581:80"
+      - 172.17.0.1:28123:8123
+      - 29000:9000
+      - 24306:3306
+      - 25432:5432
     environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: ${SOFTWARE_PASSWORD}
-      MYSQL_USERNAME: root
-      MYSQL_ROOT_PASSWORD: ${SOFTWARE_PASSWORD}
-    depends_on:
-      - mysql
+      - CLICKHOUSE_USER=root
+      - CLICKHOUSE_PASSWORD=${SOFTWARE_PASSWORD}
+      - CLICKHOUSE_DB=default
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  tabix:
+        image: spoonest/clickhouse-tabix-web-client
+        ports:
+            - 172.17.0.1:28124:80
+        depends_on:
+            - clickhouse
+        restart: unless-stopped
+        environment:
+            - CH_NAME=clickhouse
+            - CH_HOST=https://[DOMAIN]:18123
+            - CH_LOGIN=root
+            - CH_PASSWORD=${SOFTWARE_PASSWORD}

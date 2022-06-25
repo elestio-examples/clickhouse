@@ -1,9 +1,8 @@
-# MySQL + PhpMyAdmin docker compose demo CI/CD pipeline
+# Clickhouse + Tabix docker compose on Elestio
 
+<a href="https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/docker-compose-clickhouse"><img src="deploy-on-elestio.png" alt="Deploy on Elest.io" width="180px" /></a>
 
-<a href="https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/docker-compose-mysql"><img src="deploy-on-elestio.png" alt="Deploy on Elest.io" width="180px" /></a>
-
-Example application and CI/CD pipeline showing how to deploy a MySQL + PhpMyAdmin docker compose to elestio.
+Example application and CI/CD pipeline showing how to deploy a clickhouse + tabix docker-compose to elestio.
 
 
 ## CI/CD on Elestio
@@ -25,11 +24,11 @@ We have three different types of deployment method
 - Gitlab
 - Docker compose
 
-But for these MySQL + PhpMyAdmin examples, you can choose Docker compose as your deployment method.
+But for these clickhouse + tabix  examples, you can choose Docker compose as your deployment method.
 
 ### Step 3: Select Docker compose example
 
-After selecting a deployment select MySQL + PhpMyAdmin as your docker-compose example
+After selecting a deployment select clickhouse + tabix as your docker-compose example
 
 ### Step 4: Configuration
 
