@@ -1,5 +1,5 @@
 config:
-  runTime: "docker-compose"
+  runTime: "dockerCompose"
   version: ""
   framework: ""
   buildCommand: "docker-compose build"
