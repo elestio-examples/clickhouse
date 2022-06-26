@@ -15,6 +15,13 @@ ports:
     isAuth: true
     login: "root"
     password: "random_password"     
+  - protocol: "HTTPS"
+    targetProtocol: "HTTP"
+    listeningPort: "18123"
+    targetPort: "28123"
+    public: true
+    path: "/"
+    isAuth: false
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
