@@ -9,77 +9,67 @@ Example application and CI/CD pipeline showing how to deploy a clickhouse + tabi
 
 Fork this repository to create your own copy that you can modify and use in a CI/CD pipeline
 
+When configuring your pipeline, pay attention to ports and reverse proxy. If you try to deploy multiple pipelines to the same CICD target ports will be already in use. To avoid that if you want to deploy a second instance of this app to the same target you will have to change the ports in the docker-compose.yml and also in the reverse proxy configuration.
 
-# Steps to create CI/CD pipeline on elestio
+## Once deployed
 
-### Step 1: Select CI/CD from left sidebar in app.
+You can connect to your instance with the Web UI:
 
-Click [here](https://dash.elest.io/deploy?source=cicd) to directly go to the CI/CD
+    Host: https://[CI_CD_DOMAIN]:28125/
+    Login: root
+    Password: [SOFTWARE_PASSWORD]
 
-### Step 2: Select Deployment method.
+HTTPS API is available on port: 18123 with same credentials
 
-We have three different types of deployment method
+    https://[CI_CD_DOMAIN]:18123/
+    HTTPS URI: clickhouse://root:[SOFTWARE_PASSWORD]@[CI_CD_DOMAIN]:18123/default?protocol=https
 
-- Github
-- Gitlab
-- Docker compose
+Native clickhouse protocol is available on port: 29000 with same credentials
 
-But for these clickhouse + tabix  examples, you can choose Docker compose as your deployment method.
+    CH Native host: [CI_CD_DOMAIN]
+    CH Native port: 29000
+    Native URI: clickhouse://root:[SOFTWARE_PASSWORD]@[CI_CD_DOMAIN]:29000/default?protocol=native
 
-### Step 3: Select Docker compose example
 
-After selecting a deployment select clickhouse + tabix as your docker-compose example
+Your ClickHouse instance can also be used with MySQL & Postgres protocol:
 
-### Step 4: Configuration
+    MySQL protocol:
+    Host: [CI_CD_DOMAIN]
+    Port: 24306
+    Login: root
+    Password: [SOFTWARE_PASSWORD]
+    URI: mysql://root:[SOFTWARE_PASSWORD]@[CI_CD_DOMAIN]:24306/default
 
-After selecting a repo or inserting a URL it will auto-filled all the desired configurations using the elestio.yml/elestio.json file.
+    Postgres protocol:
+    Host: [CI_CD_DOMAIN]
+    Port: 25432
+    Login: root
+    Password: [SOFTWARE_PASSWORD]
+    URI: postgres://root:[SOFTWARE_PASSWORD]@[CI_CD_DOMAIN]:25432/default
 
-You can also manually customize the Configure your application, Reverse proxy configuration, and Environment variables.
 
-### Step 5: Choose Deployment Targets
+ClickHouse documentation: https://clickhouse.tech/docs/en/
 
-Elestio provides two different types of deployment targets.
+Tabix Documentation: https://tabix.io/doc/
 
-- New Infrastructure
-- Existing Infrastructures
+Tabix Tips: https://tabix.io/doc/Tips/
 
-On elestio single CI/CD target you can deploy multiple CI/CD pipelines so, If you already have CI/CD target on elestio then you can deploy a new pipeline on the same existing CI/CD target by choosing **Existing Infrastructures** and then select the CI/CD target otherwise if you don't have anything or want to deploy on new target then you can choose **New Infrastructure**
 
-If you choose **New Infrastructure** then you have to select the deployment mode we have two different types of deployment modes.
 
-- Single-mode.
-- Cluster mode.
 
-  **NOTE:-** Steps 6,7,8 and 9 are only for New Infrastructure targets for Existing Infrastructures targets directly following the final step.
+# Sample usage with Node.js
 
-### Step 6: Select Service Cloud Provider
+    const ClickHouse = require('@apla/clickhouse')
+    const ch = new ClickHouse({
+        "host": "[CI_CD_DOMAIN]",
+        "protocol": "https:",
+        "port": 18123,
+        "user": "root",
+        "password": "[SOFTWARE_PASSWORD]"
+    });
 
-Elestio supports five different types of cloud service providers you can choose anyone to deploy your service.
+    (async () => {
+            var result = await ch.querying("SELECT 1");
+            console.log(result);
+    })();
 
-- Hetzner Cloud.
-- Digital Ocean.
-- Amazon Lightsail.
-- Linode.
-- Vultr.
-
-We also provide a BYOVM service option so if you already have your VM on any third-party provider (Azure, GCP, Alibaba, ...) then you can choose BYOVM to deploy CI/CD pipeline on your VM.
-
-Elestio provides one BYOVM service for free. To be eligible the VM you connect must have no more than 2 vCPU, max 4 GB of ram, and max 80 GB of storage
-
-### Step 7: Select Service Plan
-
-This step is only for other than BYOVM service providers.
-
-We're providing multiple different types of service plans as per proposing by your selected providers.
-
-### Step 8: Provide Service Name
-
-By default, we create a unique target name for you but you can customize it.
-
-### Step Final: Create Ci/CD pipeline
-
-Now after following all the above steps you can click on the button **Create Ci/CD pipeline**.
-
-It will take a few seconds to deploy your pipeline on elestio.
-
-For each pipeline deployed on elestio will create a cname for it. but if you want your custom domain then you can configure it inside the target details.
