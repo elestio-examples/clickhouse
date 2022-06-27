@@ -10,6 +10,7 @@ ports:
     targetProtocol: "HTTP"
     listeningPort: "443"
     targetPort: "28124"
+    targetIP: "172.17.0.1"
     public: true
     path: "/"
     isAuth: true
@@ -19,6 +20,7 @@ ports:
     targetProtocol: "HTTP"
     listeningPort: "18123"
     targetPort: "28123"
+    targetIP: "172.17.0.1"
     public: true
     path: "/"
     isAuth: false
