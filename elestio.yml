@@ -24,6 +24,24 @@ ports:
     public: true
     path: "/"
     isAuth: false
+  - protocol: "TCP"
+    targetProtocol: "TCP"
+    listeningPort: "29000"
+    targetIP: "172.17.0.1"
+    targetPort: "9000"
+    public: true
+  - protocol: "TCP"
+    targetProtocol: "TCP"
+    listeningPort: "24306"
+    targetIP: "172.17.0.1"
+    targetPort: "3306"
+    public: true
+  - protocol: "TCP"
+    targetProtocol: "TCP"
+    listeningPort: "25432"
+    targetIP: "172.17.0.1"
+    targetPort: "5432"
+    public: true
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
