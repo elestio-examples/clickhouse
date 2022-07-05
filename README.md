@@ -1,6 +1,6 @@
 # Clickhouse + Tabix docker compose on Elestio
 
-<a href="https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/docker-compose-clickhouse"><img src="deploy-on-elestio.png" alt="Deploy on Elest.io" width="180px" /></a>
+<a href="https://dash.elest.io/deploy?source=cicd&social=dockerCompose&url=https://github.com/elestio-examples/clickhouse"><img src="deploy-on-elestio.png" alt="Deploy on Elest.io" width="180px" /></a>
 
 Example application and CI/CD pipeline showing how to deploy a clickhouse + tabix docker-compose to elestio.
 
