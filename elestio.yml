@@ -5,6 +5,8 @@ config:
   buildCommand: "docker-compose build"
   buildDir: "/"
   runCommand: "docker-compose up -d"
+  icon: "icon.svg"
+  screenshot: "screenshot.png"
 ports:
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
@@ -48,4 +50,8 @@ environments:
   - key: "SOFTWARE_PASSWORD"
     value: "random_password"
   - key: "DOMAIN"
-    value: "[CI_CD_DOMAIN]"    
+    value: "[CI_CD_DOMAIN]"
+webUI:
+  - url: "https://[CI_CD_DOMAIN]"
+    label: "Tabix Webclient"    
+
