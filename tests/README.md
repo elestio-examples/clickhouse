@@ -46,7 +46,7 @@ Run the project with the following command
     docker-compose up -d
     ./scripts/postInstall.sh
 
-You can access the Web UI at: `http://your-domain:28124`
+You can access the Web UI at: `http://your-domain:28123`
 
 ## Docker-compose
 
