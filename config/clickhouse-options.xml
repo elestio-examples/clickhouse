@@ -1,6 +1,6 @@
 <clickhouse>
-    <mysql_port>3306</mysql_port>
-    <postgresql_port>5432</postgresql_port>
+    <mysql_port>24306</mysql_port>
+    <postgresql_port>25432</postgresql_port>
     <compression incl="clickhouse_compression">
         <case>
             <method>lz4</method>  
