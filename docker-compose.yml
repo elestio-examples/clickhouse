@@ -5,7 +5,7 @@ services:
     image: clickhouse/clickhouse-server:${SOFTWARE_VERSION_TAG}
     restart: unless-stopped
     volumes:
-      - ./data:/var/lib/clickhouse
+      - ./data/clickhouse:/var/lib/clickhouse
       - ./config/clickhouse-user-config.xml:/etc/clickhouse-server/users.d/logging.xml:ro
       - ./config/clickhouse-options.xml:/etc/clickhouse-server/config.d/options.xml:ro
     ports:
