@@ -10,7 +10,7 @@ config:
 ports:
   - protocol: "HTTPS"
     targetProtocol: "HTTP"
-    listeningPort: "443"
+    listeningPort: "28125"
     targetPort: "28124"
     targetIP: "172.17.0.1"
     public: true
@@ -26,24 +26,6 @@ ports:
     public: true
     path: "/"
     isAuth: false
-  - protocol: "TCP"
-    targetProtocol: "TCP"
-    listeningPort: "29000"
-    targetIP: "172.17.0.1"
-    targetPort: "9000"
-    public: true
-  - protocol: "TCP"
-    targetProtocol: "TCP"
-    listeningPort: "24306"
-    targetIP: "172.17.0.1"
-    targetPort: "3306"
-    public: true
-  - protocol: "TCP"
-    targetProtocol: "TCP"
-    listeningPort: "25432"
-    targetIP: "172.17.0.1"
-    targetPort: "5432"
-    public: true
 environments:
   - key: "SOFTWARE_VERSION_TAG"
     value: "latest"
